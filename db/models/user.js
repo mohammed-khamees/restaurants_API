@@ -34,7 +34,7 @@ user.statics.authenticateBasic = async function (email, password) {
 
 			return [jwt.sign(payload, process.env.SECRET, options), 200];
 		}
-		return ['The password you’ve entered is incorrect', 403];
+		return ['Invalid Email or Password', 403];
 	} catch (error) {
 		throw new Error(error.message);
 	}
