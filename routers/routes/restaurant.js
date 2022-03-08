@@ -15,6 +15,8 @@ const restaurantRouter = express.Router();
 
 restaurantRouter.get('/', authentication, getAllRestaurants);
 restaurantRouter.get('/search', authentication, getRestaurantsByName);
+
+//For Admins
 restaurantRouter.post('/', authentication, authorization, addNewRestaurant);
 restaurantRouter.put('/:id', authentication, authorization, updateRestaurant);
 restaurantRouter.delete(

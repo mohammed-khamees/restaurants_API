@@ -12,13 +12,18 @@ const getAllCities = (req, res) => {
 };
 
 const getCityByName = (req, res) => {
-	const city = req.query.name;
+	const { name } = req.query;
 
-	if (!city) return res.status(404).json(`${city} is not found`);
+	if (!name)
+		return res
+			.status(404)
+			.json(`query name is not found, please provide name query in the url`);
 
 	cityModel
-		.findOne({ name: city })
+		.findOne({ name })
 		.then((result) => {
+			if (!result) return res.status(404).json(`${name} is not found`);
+
 			res.status(200).json(result);
 		})
 		.catch((err) => {

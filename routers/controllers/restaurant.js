@@ -12,13 +12,18 @@ const getAllRestaurants = (req, res) => {
 };
 
 const getRestaurantsByName = (req, res) => {
-	const restaurant = req.query.name;
+	const { name } = req.query;
 
-	if (!restaurant) return res.status(404).json(`${restaurant} is not found`);
+	if (!name)
+		return res
+			.status(404)
+			.json(`query name is not found, please provide name query in the url`);
 
 	restaurantsModel
-		.find({ name: restaurant })
+		.findOne({ name })
 		.then((result) => {
+			if (!result) return res.status(404).json(`${name} is not found`);
+
 			res.status(200).json(result);
 		})
 		.catch((err) => {

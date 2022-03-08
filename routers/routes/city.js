@@ -15,6 +15,8 @@ const cityRouter = express.Router();
 
 cityRouter.get('/', authentication, getAllCities);
 cityRouter.get('/search', authentication, getCityByName);
+
+//For Admins
 cityRouter.post('/', authentication, authorization, addNewCity);
 cityRouter.put('/:id', authentication, authorization, updateCity);
 cityRouter.delete('/:id', authentication, authorization, deleteCity);
