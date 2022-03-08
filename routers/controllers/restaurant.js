@@ -1,4 +1,5 @@
 const restaurantsModel = require('./../../db/models/restaurant');
+const cityModel = require('./../../db/models/city');
 
 const getAllRestaurants = (req, res) => {
 	restaurantsModel
@@ -31,6 +32,36 @@ const getRestaurantsByName = (req, res) => {
 		});
 };
 
+const groubRestaurantsByCity = (req, res) => {
+	const city = req.params.city.toLowerCase();
+
+	cityModel
+		.findOne({ city })
+		.then((result) => {
+			if (!result) return res.status(404).json(`${city} is not found`);
+			else {
+				restaurantsModel
+					.find({ city: result._id })
+					.then((restaurants) => {
+						if (!restaurants.length)
+							return res
+								.status(404)
+								.json(`There are no restaurants in ${city}`);
+
+						res
+							.status(200)
+							.json({ city, count: restaurants.length, restaurants });
+					})
+					.catch((err) => {
+						res.send(err);
+					});
+			}
+		})
+		.catch((err) => {
+			res.send(err);
+		});
+};
+
 const addNewRestaurant = (req, res) => {
 	const restaurant = new restaurantsModel(req.body);
 
@@ -45,7 +76,7 @@ const addNewRestaurant = (req, res) => {
 };
 
 const updateRestaurant = (req, res) => {
-	const id = req.params.id;
+	const { id } = req.params;
 
 	restaurantsModel
 		.findByIdAndUpdate(id, req.body, { new: true })
@@ -58,7 +89,7 @@ const updateRestaurant = (req, res) => {
 };
 
 const deleteRestaurant = (req, res) => {
-	const id = req.params.id;
+	const { id } = req.params;
 
 	restaurantsModel
 		.findByIdAndDelete(id)
@@ -77,6 +108,7 @@ const deleteRestaurant = (req, res) => {
 module.exports = {
 	getAllRestaurants,
 	getRestaurantsByName,
+	groubRestaurantsByCity,
 	addNewRestaurant,
 	updateRestaurant,
 	deleteRestaurant,

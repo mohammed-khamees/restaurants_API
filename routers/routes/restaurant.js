@@ -2,6 +2,7 @@ const express = require('express');
 const {
 	getAllRestaurants,
 	getRestaurantsByName,
+	groubRestaurantsByCity,
 	addNewRestaurant,
 	updateRestaurant,
 	deleteRestaurant,
@@ -15,6 +16,7 @@ const restaurantRouter = express.Router();
 
 restaurantRouter.get('/', authentication, getAllRestaurants);
 restaurantRouter.get('/search', authentication, getRestaurantsByName);
+restaurantRouter.get('/:city', authentication, groubRestaurantsByCity);
 
 //For Admins
 restaurantRouter.post('/', authentication, authorization, addNewRestaurant);

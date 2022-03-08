@@ -68,7 +68,7 @@ const getUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-	const id = req.params.id;
+	const { id } = req.params;
 
 	userModel
 		.findByIdAndUpdate(id, req.body, { new: true })
@@ -81,7 +81,7 @@ const updateUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-	const id = req.params.id;
+	const { id } = req.params;
 
 	userModel
 		.findByIdAndDelete(id)

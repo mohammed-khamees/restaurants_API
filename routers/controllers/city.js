@@ -32,7 +32,7 @@ const getCityByName = (req, res) => {
 };
 
 const addNewCity = (req, res) => {
-	const city = new cityModel(req.body);
+	const city = new cityModel({ name: req.body.name.toLowerCase() });
 
 	city
 		.save()
@@ -45,7 +45,7 @@ const addNewCity = (req, res) => {
 };
 
 const updateCity = (req, res) => {
-	const id = req.params.id;
+	const { id } = req.params;
 
 	cityModel
 		.findByIdAndUpdate(id, req.body, { new: true })
@@ -58,7 +58,7 @@ const updateCity = (req, res) => {
 };
 
 const deleteCity = (req, res) => {
-	const id = req.params.id;
+	const { id } = req.params;
 
 	cityModel
 		.findByIdAndDelete(id)
