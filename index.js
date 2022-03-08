@@ -5,6 +5,8 @@ const cors = require('cors');
 
 //routers
 const userRouter = require('./routers/routes/user');
+const restaurantRouter = require('./routers/routes/restaurant');
+const cityRouter = require('./routers/routes/city');
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(cors());
 
 // router middleware
 app.use(userRouter);
+app.use('/restaurants', restaurantRouter);
+app.use('/cities', cityRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

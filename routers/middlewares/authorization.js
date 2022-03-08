@@ -1,4 +1,4 @@
-const authorization = () => {
+const authorization = (req, res, next) => {
 	try {
 		if (req.token.role === 'User') throw new Error();
 		next();
