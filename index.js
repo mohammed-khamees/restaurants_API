@@ -4,6 +4,7 @@ require('dotenv').config();
 const cors = require('cors');
 
 //routers
+const userRouter = require('./routers/routes/user');
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 // router middleware
+app.use(userRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
