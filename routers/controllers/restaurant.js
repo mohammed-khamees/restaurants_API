@@ -8,7 +8,7 @@ const getAllRestaurants = (req, res) => {
 			res.status(200).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -28,7 +28,7 @@ const getRestaurantsByName = (req, res) => {
 			res.status(200).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -58,7 +58,28 @@ const groubRestaurantsByCity = (req, res) => {
 			}
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
+		});
+};
+
+const nearestRestaurants = (req, res) => {
+	const { lat, long } = req.query;
+	restaurantsModel
+		.find({
+			location: {
+				$near: {
+					$geometry: {
+						type: 'Point',
+						coordinates: [lat, long],
+					},
+				},
+			},
+		})
+		.then((result) => {
+			res.status(200).json(result);
+		})
+		.catch((err) => {
+			res.status(400).json(err);
 		});
 };
 
@@ -71,7 +92,7 @@ const addNewRestaurant = (req, res) => {
 			res.status(201).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -84,7 +105,7 @@ const updateRestaurant = (req, res) => {
 			res.status(200).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -101,7 +122,7 @@ const deleteRestaurant = (req, res) => {
 			});
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -109,6 +130,7 @@ module.exports = {
 	getAllRestaurants,
 	getRestaurantsByName,
 	groubRestaurantsByCity,
+	nearestRestaurants,
 	addNewRestaurant,
 	updateRestaurant,
 	deleteRestaurant,

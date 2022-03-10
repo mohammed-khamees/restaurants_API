@@ -3,6 +3,7 @@ const {
 	getAllRestaurants,
 	getRestaurantsByName,
 	groubRestaurantsByCity,
+	nearestRestaurants,
 	addNewRestaurant,
 	updateRestaurant,
 	deleteRestaurant,
@@ -16,6 +17,7 @@ const restaurantRouter = express.Router();
 
 restaurantRouter.get('/', authentication, getAllRestaurants);
 restaurantRouter.get('/search', authentication, getRestaurantsByName);
+restaurantRouter.get('/nearestRestaurants', nearestRestaurants);
 restaurantRouter.get('/:city', authentication, groubRestaurantsByCity);
 
 //For Admins

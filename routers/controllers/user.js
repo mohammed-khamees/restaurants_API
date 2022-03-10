@@ -16,7 +16,7 @@ const signUp = (req, res) => {
 			res.status(201).json(result);
 		})
 		.catch((err) => {
-			res.status(400).send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -32,7 +32,7 @@ const login = (req, res) => {
 			res.status(result[1]).json(result[0]);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -43,7 +43,7 @@ const allUser = (req, res) => {
 			res.status(200).json(result);
 		})
 		.catch((err) => {
-			res.status(400).send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -63,7 +63,7 @@ const getUser = (req, res) => {
 			res.status(200).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -76,7 +76,7 @@ const updateUser = (req, res) => {
 			res.status(200).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -93,7 +93,7 @@ const deleteUser = (req, res) => {
 			});
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 

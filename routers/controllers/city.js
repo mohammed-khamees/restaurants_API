@@ -7,7 +7,7 @@ const getAllCities = (req, res) => {
 			res.status(200).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -27,12 +27,12 @@ const getCityByName = (req, res) => {
 			res.status(200).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
 const addNewCity = (req, res) => {
-	const city = new cityModel({ name: req.body.name.toLowerCase() });
+	const city = new cityModel(req.body);
 
 	city
 		.save()
@@ -40,7 +40,7 @@ const addNewCity = (req, res) => {
 			res.status(201).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -53,7 +53,7 @@ const updateCity = (req, res) => {
 			res.status(200).json(result);
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
@@ -70,7 +70,7 @@ const deleteCity = (req, res) => {
 			});
 		})
 		.catch((err) => {
-			res.send(err);
+			res.status(400).json(err);
 		});
 };
 
