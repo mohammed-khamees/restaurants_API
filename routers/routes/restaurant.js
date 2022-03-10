@@ -17,7 +17,7 @@ const restaurantRouter = express.Router();
 
 restaurantRouter.get('/', authentication, getAllRestaurants);
 restaurantRouter.get('/search', authentication, getRestaurantsByName);
-restaurantRouter.get('/nearestRestaurants', nearestRestaurants);
+restaurantRouter.get('/nearestRestaurants', authentication, nearestRestaurants);
 restaurantRouter.get('/:city', authentication, groubRestaurantsByCity);
 
 //For Admins

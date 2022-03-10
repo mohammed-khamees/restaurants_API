@@ -4,6 +4,8 @@ const cityModel = require('./../../db/models/city');
 const getAllRestaurants = (req, res) => {
 	restaurantsModel
 		.find({})
+		.populate('city', 'name -_id')
+		.exec()
 		.then((result) => {
 			res.status(200).json(result);
 		})
@@ -22,6 +24,7 @@ const getRestaurantsByName = (req, res) => {
 
 	restaurantsModel
 		.findOne({ name })
+		.populate('city', 'name -_id')
 		.then((result) => {
 			if (!result) return res.status(404).json(`${name} is not found`);
 
@@ -75,6 +78,7 @@ const nearestRestaurants = (req, res) => {
 				},
 			},
 		})
+		.populate('city', 'name -_id')
 		.then((result) => {
 			res.status(200).json(result);
 		})
