@@ -3,15 +3,20 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const user = new mongoose.Schema({
-	name: { type: String, required: true },
-	email: { type: String, required: true, unique: true },
-	password: { type: String, required: true },
+	name: { type: String, required: true, trim: true },
+	email: {
+		type: String,
+		required: true,
+		unique: true,
+		lowercase: true,
+		trim: true,
+	},
+	password: { type: String, required: true, trim: true },
 	role: { type: String, default: 'User' },
 });
 
 // Hashed the password
 user.pre('save', async function () {
-	this.email = this.email.toLowerCase();
 	this.password = await bcrypt.hash(this.password, 10);
 });
 

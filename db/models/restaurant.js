@@ -15,8 +15,14 @@ const pointSchema = new mongoose.Schema({
 const restaurant = new mongoose.Schema({
 	city: { type: mongoose.Schema.Types.ObjectId, ref: 'City' },
 	image: { type: String, required: true },
-	name: { type: String, required: true, unique: true },
-	email: { type: String, required: true, unique: true },
+	name: { type: String, required: true, unique: true, trim: true },
+	email: {
+		type: String,
+		required: true,
+		unique: true,
+		lowercase: true,
+		trim: true,
+	},
 	location: {
 		type: pointSchema,
 		required: true,
