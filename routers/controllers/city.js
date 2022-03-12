@@ -65,7 +65,7 @@ const deleteCity = (req, res) => {
 		.then((result) => {
 			res.status(200).json({
 				success: true,
-				message: `The restaurant has been deleted`,
+				message: `The city has been deleted`,
 				result,
 			});
 		})
